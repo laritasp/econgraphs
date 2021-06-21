@@ -1,3 +1,136 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[dvipsnames]{xcolor}
+ \usepackage[makeroom]{cancel}
+\usepackage{framed, hyperref}
+\usepackage{enumitem}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage[margin=1.5cm]{geometry}  % margenes
+\renewcommand{\baselinestretch}{1.15}  % interlineado
+
+\def\Frac#1#2{\color{black} #1 \above 0.4pt \color{red} #2}
+
+% Encabezado y pie
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\textsc{Organización Industrial}}
+\rhead{\textsc{Lara Sánchez Peña}}
+% \lfoot{Pr\'actica 1}
+% \rfoot{Handout 1}
+
+% Gráficos
+%\usepackage{graphicx}
+%\graphicspath{{./tp1_extra_material/}}
+
+\makeatletter
+\def\munderbar#1{\underline{\sbox\tw@{$#1$}\dp\tw@\z@\box\tw@}}
+\makeatother
+
+% Para poner código de R
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codebackcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{codestyle}{
+    backgroundcolor=\color{codebackcolour},   
+    commentstyle=\color{codegreen},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=codestyle}
+
+% 
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}
+\newtheorem{solucion}{Soluci\'on}
+%\theoremstyle{}
+\newtheorem{sugerencia}{Sugerencia}
+
+% \usepackage{mdframed}
+% \newmdtheoremenv{solucion}{Soluci\'on}
+
+% Enmarcar las soluciones
+% \newenvironment{solu}
+% {%
+% \begin{framed}
+%   \begin{solucion}
+%   }%
+%     {%     
+%   \end{solucion}
+% \end{framed}
+% }
+
+%   Esconder las soluciones
+\newif\ifhideproofs
+%\hideproofstrue %uncomment to hide proofs
+
+\ifhideproofs
+\usepackage{environ}
+\NewEnviron{hide}{}
+\let\solucion\hide
+\let\endsolucion\endhide
+\fi
+
+\fancypagestyle{plain}{}
+
+%Graficos y cosas
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{mathtools,amssymb}
+\usepackage{xcolor}
+\usepackage{pst-func}
+\usepackage{pstricks}
+\usepackage{pst-plot}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.10}
+\usetikzlibrary{intersections}
+\usetikzlibrary{patterns}
+
+%Paréntisis y otros
+\newcommand{\cmc}{\overset{m.c.}{\rightarrow}}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\cor}[1]{\left[#1\right]}
+\newcommand{\lla}[1]{\left\{#1\right\}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\lol}{\mathcal{L}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\definecolor{rosee}{rgb}{0.7,0.05,0.25}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\corc}[1]{\left[#1\right]}
+\newcommand{\llav}[1]{\left\lbrace#1\right\rbrace}
+\newcommand{\partt}[1]{\left(\text{#1}\right)}
+\newcommand{\corctt}[1]{\left[\text{#1}\right]}
+\newcommand{\llavtt}[1]{\left\lbrace\text{#1}\right\rbrace}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+\DefineNamedColor{named}{BlueViolet} {cmyk}{0.86,0.91,0,0.04}
+\DefineNamedColor{named}{CornflowerBlue}{cmyk}{0.65,0.13,0,0}
+\DefineNamedColor{named}{DarkOrchid} {cmyk}{0.40,0.80,0.20,0}
+\DefineNamedColor{named}{Magenta} {cmyk}{0,1,0,0}
+\DefineNamedColor{named}{LimeGreen} {cmyk}{0.50,0,1,0}
+\DefineNamedColor{named}{OliveGreen} {cmyk}{0.64,0,0.95,0.40}
+\DefineNamedColor{named}{BrickRed} {cmyk}{0,0.89,0.94,0.28}
+\DefineNamedColor{named}{Lavender} {cmyk}{0,0.48,0,0}
+
+
+%Define Colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{rosee}{rgb}{0.7,0.05,0.25}
+
+\begin{document}
 \hspace{-5em}\begin{tabular}{cc}
 \begin{minipage}{.2\textwidth}
 
@@ -77,3 +210,5 @@ $\qquad\qquad\qquad \qquad \text{\small{Monopolio con}} \qquad \quad \qquad$ & $
 $\qquad\qquad\qquad \qquad \text{\small{CMg constante}}\qquad \quad \qquad$ & $\qquad\qquad\qquad \qquad \qquad \qquad \quad \qquad \text{\small{CMg creciente}}$\\
 $\qquad\qquad\qquad \qquad \text{\small{Figura 1}}\qquad \quad \qquad$ & $\qquad\qquad\qquad \qquad \qquad \qquad \quad \qquad \text{\small{Figura 2}}$
 \end{tabular}
+
+\end{document}
