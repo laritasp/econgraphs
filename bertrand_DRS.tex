@@ -1,0 +1,1308 @@
+% Pablo:
+
+
+\documentclass[a4paper, 11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[dvipsnames]{xcolor}
+ \usepackage[makeroom]{cancel}
+\usepackage{framed, hyperref}
+\usepackage{enumitem}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage[margin=1.5cm]{geometry}  % margenes
+\renewcommand{\baselinestretch}{1.15}  % interlineado
+
+\def\Frac#1#2{\color{black} #1 \above 0.4pt \color{red} #2}
+
+% Encabezado y pie
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\textsc{Organización Industrial}}
+\rhead{\textsc{Lara Sánchez Peña}}
+% \lfoot{Pr\'actica 1}
+% \rfoot{Handout 1}
+
+% Gráficos
+%\usepackage{graphicx}
+%\graphicspath{{./tp1_extra_material/}}
+
+% Para poner código de R
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codebackcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{codestyle}{
+    backgroundcolor=\color{codebackcolour},   
+    commentstyle=\color{codegreen},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=codestyle}
+
+% 
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}
+\newtheorem{solucion}{Soluci\'on}
+%\theoremstyle{}
+\newtheorem{sugerencia}{Sugerencia}
+
+% \usepackage{mdframed}
+% \newmdtheoremenv{solucion}{Soluci\'on}
+
+% Enmarcar las soluciones
+% \newenvironment{solu}
+% {%
+% \begin{framed}
+%   \begin{solucion}
+%   }%
+%     {%     
+%   \end{solucion}
+% \end{framed}
+% }
+
+%   Esconder las soluciones
+\newif\ifhideproofs
+%\hideproofstrue %uncomment to hide proofs
+
+\ifhideproofs
+\usepackage{environ}
+\NewEnviron{hide}{}
+\let\solucion\hide
+\let\endsolucion\endhide
+\fi
+
+\fancypagestyle{plain}{}
+
+%Graficos y cosas
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{mathtools,amssymb}
+\usepackage{xcolor}
+\pgfplotsset{compat=1.7}
+\usepackage{pst-func}
+\usepackage{pstricks}
+\usepackage{pst-plot}
+
+%Paréntisis y otros
+\newcommand{\cmc}{\overset{m.c.}{\rightarrow}}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\cor}[1]{\left[#1\right]}
+\newcommand{\lla}[1]{\left\{#1\right\}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\lol}{\mathcal{L}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+
+\begin{document}
+\title{Trabajo Práctico 2\footnote{Agradecimientos: Francisco Fogar Calatayud y Valeria Devoto por un excelente trabajo de edición y revisión. Todos los errores son responsabilidad mía. Quiero agradecer especialmente a Mariana Guido cuyos resueltos fueron la base para todas las soluciones. Agradezco adicionalmente a Fran Amor, a Toto Martínez, a Joaquín Liwski, a Tadeo Klappenbach y a muchas personas más por realizar controles de lectura.}} 
+\author{}
+
+\maketitle 
+
+
+\begin{ejercicio} %ejercicio 1
+
+Dos firmas compiten en cantidades y enfrentan una demanda inversa lineal
+$P(Q) = 1-Q$. Las dos tienen costos de producción idénticos: $C_i(q_i) = \frac{q_i^2}{2}$, $i = 1, 2$.
+
+\begin{enumerate}[label=(\alph*)]
+\item Compute sus respuestas óptimas y el equilibrio del modelo.
+\item Suponga ahora que la firma $1$ también puede vender su bien en otro mercado geográfico como un monopolista. La demanda en este segundo mercado es $D(p) = a-p$.
+\begin{enumerate}[label=\roman*.]
+\item ¿Cómo cambia el equilibrio de (a)?
+\item ¿Cómo varían los beneficios de la firma $1$ cuando cambia $a$? Explique.
+\end{enumerate}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion} %solucion ejercicio 1
+\
+
+ \begin{enumerate}[label=(\alph*)]
+ 
+ \item
+ La firma $i$ resuelve:
+ \vspace*{-12pt}
+ \begin{align*}
+ \displaystyle\max_{q_i} (1-q_i-q_j)q_i &- \dfrac{q_i^2}{2} \\
+ (q_i): 1-2q_i-q_j-q_i &=0\\
+ q_i^{BR}(q_j) &=\dfrac{1-q_j}{3}
+ \end{align*}
+ 
+Podemos notar que si reescribimos la CPO para las firmas 1 y 2 respectivamente obtendremos:
+ \vspace*{-12pt}
+ \begin{align*}
+     1-3q_1-q_2=0 \quad \text{para }i=1\\
+    1-3q_2-q_1=0 \quad \text{para }i=2
+ \end{align*}
+ 
+Utilizando el argumento de simetría\footnote{No suponemos que es válido el supuesto de simetría, sino que siempre lo podemos demostrar. Recuerden que suponer simetría puede ser un atajo útil cuando corresponda usarlo. En este caso, dado que las firmas enfrentan la misma demanda con la misma función de costos, podemos adelantarnos al resultado y buscar el equilibrio de Nash simétrico aunque pueda haber otros (como en el ejercicio 6).} ($q_1=q_2=q$) llegaremos a los resultados óptimos.
+ \begin{align*}
+ q^*=\dfrac{1}{4} \qquad
+ Q^*=\dfrac{1}{2} \qquad
+ p^*=\dfrac{1}{2} \qquad \hat{\pi}_1=\dfrac{3}{32}
+  \end{align*}
+  
+  Recordemos que un equilibrio de Nash es un perfil de estrategias donde cada una de las firmas elige una estrategia que es mejor respuesta, tomando como dado el perfil de estrategias que elige cada una de las otras firmas.
+
+ \item
+Supongamos que la firma $1$ es ahora monopolista en un segundo mercado. Notamos que el parámetro $a$ indicará el tamaño de dicho mercado.
+ 
+\begin{enumerate}[label=\roman*.]
+ \item
+ Primero obtenemos la demanda inversa del nuevo mercado para luego escribir el problema de maximización de beneficios de $F_1$ en función de las cantidades $q_1$ y $q_A$.
+ 
+ \vspace*{-16pt}
+ 
+ \begin{align*}
+ D(p)&=a-p\\
+ p(q_A)&=a-q_A
+ \end{align*}
+  
+ Además, sabemos que, como el problema de maximización de beneficios de la firma $2$ en el mercado compartido no cambió, su función de mejor respuesta sigue siendo la hallada en el inciso (a).
+ 
+ \[q_2^{BR}(q_1)=\dfrac{1-q_1}{3}\]
+\vspace*{-8pt}
+  
+ Por otra parte, el nuevo problema de la firma $1$ es:
+\begin{align*}
+    \displaystyle\max_{q_1, \, q_A} (1-q_1-q_2)q_1+(a-q_A)q_A- \dfrac{(q_1+q_A)^2}{2}
+\end{align*}
+
+ Podemos ver que como hay rendimientos decrecientes a escala, ya que la función de costos es convexa. Por lo tanto, las decisiones de producción de ambos bienes -el bien 1 y el bien $a$- están interrelacionadas. En caso de haber rendimientos constantes a escala, es decir, si la función de costos fuese lineal, las decisiones de producción del bien 1 y el bien $a$ se podrían considerar por separado y se podrían maximizar beneficios de los bienes de cada mercado por separado. 
+ 
+ \vspace{6pt}
+Obtenemos las condiciones de primer orden del problema:
+ \begin{align}
+ (q_1): 1-2q_1-q_2-q_1-q_A=0 \label{CPO1}\\
+ (q_A): a-2q_A-q_1-q_A=0 \label{CPO2}
+ \end{align}
+ 
+ \vspace*{-8pt}
+ 
+ Utilizando las condiciones de primer orden, buscamos las funciones de mejor respuesta.
+ 
+  De (\ref{CPO2}):
+  \vspace*{-6pt}
+ \[q_A(q_1)=\dfrac{a-q_1}{3}\]
+
+ 
+Luego, usando este resultado en (\ref{CPO1}):
+  \begin{align*}
+ q_2 &=1-3q_1-q_A\\
+ q_2 &=1-3q_1-\dfrac{a-q_1}{3}\\
+ q_2 &=\dfrac{3-a-8q_1}{3}\\
+ q_1^{BR}(q_2) &=\dfrac{3-a-3q_2}{8}
+ \end{align*}
+ Reemplazamos $q_1^{BR}(q_2)$ en la expresión $q_2^{BR}(q_1)$ para encontrar el Equilibrio de Nash.
+ \begin{align*}
+ q_2^{BR}(q_1) &=\dfrac{1-q_1^{BR}(q_2)}{3}\\
+ q_2^{BR}(q_1) &=\dfrac{1-\dfrac{3-a-3q_2}{8}}{3}\\
+ 3q_2 &=1-\dfrac{3-a-3q_2}{8}\\
+ 24q_2 &=8-3+a+3q_2\\
+ q_2 &=\dfrac{5+a}{21}>0 \quad \text{ si } a>0
+ \end{align*}
+ 
+ Entonces:
+ 
+ \vspace*{-12pt}
+ 
+ \begin{align*}
+ q_2^{BR}&(q_1)=\dfrac{1-q_1}{3}\\
+ q_1&=1-3q_2\\
+ q_1&=1-\dfrac{5+a}{7}\\
+ q_1&=\dfrac{2-a}{7}\\
+ q_1&>0 \quad \text{ si } 0<a<2
+ \end{align*}
+ 
+ Por lo tanto, para que la firma $1$ produzca tanto en el mercado en el que compite con la firma $2$ como en el que es monopolista se tiene que cumplir que $a<2$, es decir, que el tamaño del mercado $A$ no sea ``demasiado'' grande. Si el mercado donde la firma $1$ puede ser monopolista fuese ``demasiado'' grande,\footnote{Notemos que en el mercado $A$ como $D(p)=a-p$ entonces podemos pensar a $a$ como el tamaño de mercado porque es la cantidad máxima que dicho mercado estaría dispuesta a consumir. Por otra parte, como la pendiente de la demanda es $-1$ también valdrá que la pendiente de la demanda inversa será $-1$, es decir, $P(q_A)=a-q_A$. Por lo tanto, podemos pensar a $a$ como la máxima disposición a pagar de los individuos.} sería atractivo para el monopolista solamente producir para el mercado $A$, de manera que no le convendría competir en el mercado duopólico. La razón por la cual la firma $1$ estaría dispuesta a dejar de competir en el mercado 1 se debe a que los costos totales interrelacionan los niveles de producción de ambos mercados ya que hay rendimientos decrecientes a escala.
+ 
+\vspace*{-12pt}
+
+ \begin{align*}
+ q_A&=\dfrac{a-q_1}{3}\\
+ q_A&=\dfrac{a-\dfrac{2-a}{7}}{3}\\
+ q_A&=\dfrac{8a-2}{21} \qquad \text{si } a>\dfrac{1}{4}
+ \end{align*}
+ 
+ Para que la firma $1$ produzca en el mercado donde sería monopolista se tiene que cumplir que el mercado no sea ``excesivamente chico'', esto es, el parámetro $a$ tiene que ser, al menos, igual a $0.25$. Como la firma monopolista desea poner un precio que la beneficie pero la tecnología de producción viene dada por una función de costos convexos (es decir, con costos marginales crecientes), la decisión de producción no es independiente entre mercados. 
+ 
+ Cuando la firma $1$ decide producir un poco más en el mercado $A$ (ya sea porque empieza a producir o porque ya estaba produciendo) ocurren dos efectos contrapuestos dado que la función de costos es convexa. Por un lado puede obtener beneficios por vender en el mercado donde es monopolista y por otro decide producir menos en el mercado donde es duopolista ya que sino sus costos aumentarían a una tasa creciente. Esto implica que la firma $2$, cuya estrategia $q_2$ es sustituta estratégica de la estrategia de la firma $1$, $(q_1,q_A)$\footnote{Recordar que las estrategias de las firmas son las variables que eligen en la maximización de beneficios y que la derivada de la función de mejor respuesta respecto de la estrategia del rival es negativa.}, decide producir más y se lleva así una porción mayor del mercado. 
+ Por lo tanto, como veremos más adelante, si el mercado $A$ es lo suficientemente pequeño ($a$ es menor que algún valor), los beneficios que obtiene la firma $1$ de producir como monopolista se ven contrarrestados por el aumento más que proporcional en el costo total de producción en el mercado duopólico.
+ 
+ \vspace{12pt}
+ \textbf{Notemos que podría ocurrir que la firma $1$ decidiera no producir en el mercado duopólico.} Su problema sería entonces:
+ 
+ \vspace*{-18pt}
+ 
+ \[\displaystyle\max_q (a-q)q- \dfrac{q^2}{2}\]
+  
+ Obteniendo la condición de primer orden y operando como lo hacemos usualmente llegaremos a que:
+ 
+ \vspace*{-32pt}
+ 
+ \begin{align*}
+ a-2q-q&=0\\
+ q&=\dfrac{a}{3} \Longrightarrow p=\dfrac{2a}{3}
+ \end{align*}
+ 
+ Podemos observar que tanto las cantidades como los precios en el mercado monopolista aumentan con una suba de $a$.
+ 
+ En ese caso, los beneficios son:
+ 
+ \vspace*{-28pt}
+ 
+  \begin{align*}
+ \pi&=\dfrac{2a}{3}\cdot\dfrac{a}{3}-\dfrac{1}{2}\cdot\dfrac{a^2}{9}\\
+ \pi&=\left(\dfrac{2}{9}-\dfrac{1}{18}\right)a^2\\
+ \pi&=\dfrac{a^2}{9}
+ \end{align*}
+ Aquí podemos ver que los beneficios también aumentan con una suba de $a$. 
+
+ Recordemos que obtuvimos el siguiente equilibrio de la resolución del problema anterior a considerar la posibilidad de que la firma $1$ decidiera producir solamente en el mercado donde es monopolista:\footnote{Notemos que en esta materia decimos que encontramos un equilibrio pero solamente resolvimos el problema de la firma (aparentemente). ¿Cómo puede ser?  En realidad, la función de demanda agregada se obtiene de resolver el  problema de cada agente y al tener esa información está implícito que resolvimos el problema de maximización de utilidad (UMP). En esta materia nos concentraremos, en general, en el problema de la firma tomando como dado el problema del consumidor.}
+ 
+ \vspace*{-18pt}
+ 
+ \begin{align*}
+     \begin{cases} q_1^* =\dfrac{2-a}{7} \vspace{4pt}\\ q_2^* =\dfrac{5+a}{21} \vspace{4pt}\\  q_A^*=\dfrac{8a-2}{21} \end{cases} \quad \begin{cases}  p^* =\dfrac{10+2a}{21} \vspace{4pt}\\ p_A^*=\dfrac{13a+2}{21} \end{cases} 
+ \end{align*}
+ 
+ \vspace{4pt}
+ \begin{itemize}
+\item Si $a<\frac{1}{4}$, la firma $1$ venderá solamente en el mercado $1$ porque óptimamente querría vender cantidades negativas en el mercado $A$ cosa que no es posible. %a la firma $1$ le convendrá no ser monopolista en el mercado $A$ porque cada vez que produzca más en éste, debido a la presencia de costos convexos (siempre son crecientes), producirá menos en el mercado duopólico. La firma $2$ aprovechará esta situación y aumentará su producción. Por lo tanto, llegará un punto en el que la firma $1$ preferiría no vender en el mercado en que es monopolista porque sino lo que caen los beneficios en el mercado duopólico no compensan los beneficios que podría ganar en el mercado $A$.
+ \item Si $a>2$, como el tamaño del mercado $A$ es lo suficientemente grande, entonces a la firma $1$ le convendrá vender solamente en el mercado $A$ porque querría vender cantidades negativas en el mercado $1$. %debido a que, a igual cantidad de unidades producidas (teniendo en cuenta que tiene una función de costos convexa), en este caso cobrará un precio mayor por unidad que en el mercado duopólico.
+ \end{itemize}
+ 
+ 
+ Calculamos los beneficios de la firma $1$ cuando $F_1$ vende en ambos mercados y analizamos qué sucederá ante un cambio de $a$. En primer lugar, debemos definir cuáles son las cantidades en equilibrio.
+ 
+ \vspace*{-12pt}
+ 
+ \begin{align*}
+ Q=&\dfrac{11-2a}{21}\\
+ q_1^*+q_A^*&=\dfrac{6-3a+8a-2}{21} \\
+ q_1^*+q_A^*&=\dfrac{5a+4}{21}
+ \end{align*}
+ 
+ Además, los beneficios serán:
+ 
+ \vspace*{-12pt}
+ 
+ \begin{align*}
+ \pi_1^*&=p^*q_1^*+p_A^*q_A^*-\dfrac{(q_1^*+q_A^*)^2}{2}\\
+ \pi_1^*&=\dfrac{3(10+2a)}{21}\cdot\dfrac{2-a}{21}+\dfrac{13a+2}{21}\cdot\dfrac{8a-2}{21}-\dfrac{(5a+4)^2}{2\cdot21^2}\\
+ \pi_1^*&=\dfrac{1}{21^2}\cdot\left[6(5+a)(2-a)+2(13a+2)(4a-1)-\dfrac{(5a+4)^2}{2}\right]\\
+ \pi_1^*&=\frac{1}{2\cdot21^2}\cdot[12(10-3a-a^2)+4(52a^2-5a-2)-(25a^2+40a+16)]\\
+ \pi_1^*&=\frac{1}{2\cdot21^2}[171a^2-96a+96]\\
+ \pi_1^*&=\frac{1}{2\cdot21\cdot7}[57a^2-32a+32]
+ \end{align*}
+ 
+ Recordemos que para que la firma $1$ quiera vender a ambos mercados tiene que ocurrir que $\pi_1^*>\hat{\pi}_1$ y eso ocurre si $a<\frac{1}{4}$ \textit{(caso que descartamos porque en ese caso la firma $1$ no quiere vender al mercado $A$)} o $a>\frac{71}{228}$. Teniendo en cuenta que la firma $1$ quiere vender a ambos mercados si $\frac{71}{228}<a<2$ calculemos para este caso cómo cambian los beneficios de la firma $1$ cuando cambia $a$:\footnote{\textbf{¿Qué ocurre si $\frac{1}{4}<a<\frac{16}{57}$?} En este caso los beneficios de la firma $1$ de vender a ambos mercadoscaen a medida que aumenta $a$. Esto se debe a que, por un lado, \textbf{I)} la firma $1$ producirá más en el mercado $A$ aumentando sus beneficios, pero por otro, \textbf{II)} producirá menos en el mercado compartido debido a la presencia de rendimientos decrecientes. Esto sucede porque como la firma $1$ va aumentando la cantidad producida en el mercado monopólico y disminuyendo la cantidad producida en el mercado duopólico, la firma $2$ responde óptimamente aumentando la cantidad producida y obteniendo mayores beneficios. En este caso, domina el efecto \textbf{II}. \textbf{Por lo tanto, dado que la firma no está obligada a venderle al mercado $A$ sino que tiene la posibilidad venderle, los beneficios de la firma $1$ son iguales a $\frac{3}{32}$ ya uqe para este rango de valores de $a$ no tiene sentido que la firma $1$ le venda a ambos mercados.}}
+ \vspace*{-8pt}
+ \begin{align*}
+ \pi_1^*&=\dfrac{1}{2\cdot21\cdot7}[57a^2-32a+32]\end{align*}
+ \begin{align*}
+ \dfrac{\partial\pi_1^*}{\partial a}&= \dfrac{57a-16}{147}>0 \text{ si } a>\dfrac{71}{228}>\dfrac{16}{57}
+ \end{align*}
+\vspace*{-8pt}
+
+Para resumir, observemos cómo varían los beneficios de la firma $1$ a partir de los distintos tamaños posibles del mercado $A$, $a$.\footnote{Notemos que los beneficios de la firma $2$ dependen no negativamente de $a$ en cualquier caso.}
+ \begin{itemize}
+\item Si $0<a<\frac{71}{228}$, la firma $1$ sólo actúa como duopolista, por lo que no será relevante considerar el cambio en sus beneficios ante un cambio en $a$. 
+%\item Si $\frac{1}{4}<a<\frac{16}{57}$,  los beneficios de la firma caen a medida que aumenta $a$. Esto se debe a que, por un lado, \textbf{I)} la firma $1$ producirá más en el mercado $A$ aumentando sus beneficios, pero por otro, \textbf{II)} producirá menos en el mercado compartido debido a la presencia de rendimientos decrecientes. Esto sucede porque como la firma $1$ va aumentando la cantidad producida en el mercado monopólico y disminuyendo la cantidad producida en el mercado duopólico, la firma $2$ responde óptimamente aumentando la cantidad producida y obteniendo mayores beneficios. En este caso, domina el efecto \textbf{II}. Por lo tanto, dado que la firma no está obligada a venderle al mercado $A$ sino que tiene la posibilidad venderle, los beneficios de la firma $1$ son iguales a $\frac{3}{32}$.
+\item Si $\frac{16}{57}<a<2$, la firma $1$ produce cantidades positivas en ambos mercados. Para estos posibles valores de tamaño del mercado $A$, el efecto \textbf{I} de los mencionados en el inciso anterior domina y por lo tanto los beneficios de la firma $1$ aumentan a medida que $a$ aumenta. 
+\item Si $a>2$, los beneficios de la firma $1$ serán los de un monopolista del mercado $A$ porque la firma $1$ sólo venderá en el mercado donde es monopolista. En este caso los beneficios aumentarán ante una suba de $a$.
+\end{itemize}
+ \end{enumerate}
+ \end{enumerate}
+
+\end{solucion}
+
+\begin{ejercicio} %ejercicio 2
+Suponga que dos firmas compiten en cantidades. Sus costos están dados
+por $C_1(q_1) = q_1^2$ y $C_2(q_2) = \frac{1}{2}q_2^2$. Las firmas enfrentan una demanda inversa $P(Q) = 120-Q$, donde $Q = q_1 + q_2$.
+
+\begin{enumerate}[label=(\alph*)]
+\item Obtenga el equilibrio de Nash en el juego correspondiente a este mercado. ¿Cuál es el beneficio de cada firma?
+\item Tome la cantidad de mercado de equilibrio, $Q$, obtenida en (a).
+¿Cómo debería distribuirse entre las firmas dicha cantidad para que fuese producida a un costo total mínimo? ¿Cuál es la diferencia entre el costo agregado de producción en el equilibrio de Nash del modelo de Cournot y el costo mínimo posible de producción?
+\end{enumerate}
+\end{ejercicio}
+
+
+\begin{solucion} %solucion ejercicio 2
+\
+
+\begin{enumerate}[label=(\alph*)]
+\item
+El problema de la firma $1$ es:
+
+\vspace*{-16pt}
+
+\begin{align}
+\displaystyle\max_{q_1} &\,(120-q_1-q_2) q_1- q_1^2& \notag\\
+&(q_1): 120-2q_1-q_2-2q_1=0 \label{CPO_firma1}\\
+&\Longrightarrow q_1^{BR}(q_2)=\dfrac{120-q_2}{4} \notag
+\end{align}
+
+Por otra parte, el problema de la firma $2$ es:
+
+\vspace*{-16pt}
+
+\begin{align}
+\displaystyle\max_{q_2} \,(120-q_1-q_2) q_2-&\dfrac{q_2^2}{2} \notag\\
+(q_2): 120-q_1-2q_2-q_2 &=0 \label{CPO_firma2}\\
+\Longrightarrow q_2^{BR}(q_1) &=\dfrac{120-q_1}{3} \notag
+\end{align}
+
+Vamos a encontrar el equilibrio utilizando el sistema de ecuaciones compuesto por las condiciones de primer orden. De (\ref{CPO_firma2}) despejamos $q_1$ y lo reemplazamos en (\ref{CPO_firma1}).
+
+\vspace*{-16pt}
+
+\begin{align*}
+120-3q_2-q_1&=0\\
+q_1&=120-3q_2\\
+\text{En (\ref{CPO_firma1}):} \quad 120-4q_1-q_2&=0\\
+120&=4(120-3q_2)+q_2\\
+120&=480-11q_2\\
+11q_2&=360\\
+q_2&=\dfrac{360}{11}
+\end{align*}
+
+Ahora que  conocemos el valor de $q_2$ podemos reemplazarlo en la ecuación de  $q_1$ que habíamos obtenido.
+
+\vspace*{-16pt}
+
+\begin{align*}
+q_1&=120-3\cdot\dfrac{360}{11}\\
+q_1&=\dfrac{11\cdot120-9\cdot120}{11}\\
+q_1&=\dfrac{240}{11}
+\end{align*}
+
+Obtenemos la cantidad agregada y el nivel de precios:
+
+\vspace*{-16pt}
+
+\begin{align*}
+Q&=\dfrac{600}{11}\\
+p&=120-\dfrac{600}{11}\\
+p&=\dfrac{720}{11}
+\end{align*}
+
+\vspace*{-8pt}
+
+Por lo tanto, el equilibrio que obtuvimos es el siguiente:
+
+\vspace*{-16pt}
+
+\begin{align*}
+\begin{cases} q_1^*=\dfrac{240}{11} \qquad q_2^*=\dfrac{360}{11} \vspace{4pt}\\  Q^*=\dfrac{600}{11} \qquad
+p^*=\dfrac{720}{11} \end{cases}
+\end{align*}
+
+Buscamos ahora los beneficios de cada firma.
+
+\vspace*{-12pt}
+
+\begin{align*}\begin{cases}
+\pi_1^*=\dfrac{720}{11}\cdot\dfrac{240}{11}-\left(\dfrac{240}{11}\right)^2\Longrightarrow
+\pi_1^*=8\cdot\left(\dfrac{120}{11}\right)^2\vspace{4pt}\\
+\pi_2^*=\dfrac{720}{11}\cdot\dfrac{360}{11}-\dfrac{1}{2}\left(\dfrac{360}{11}\right)^2\Longrightarrow
+\pi_2^*=13.5\cdot\left(\dfrac{120}{11}\right)^2
+\end{cases}
+\end{align*}
+
+Además,
+
+\vspace{-24pt}
+
+\begin{align*}
+CMg_1&=2q_1\\
+CMg_2&=q_2\\
+\dfrac{480}{11}=2q_1^*&>q_2^*=\dfrac{360}{11}
+\end{align*}
+
+Podemos notar que $\pi_2^*>\pi_1^*$, es decir que la firma más eficiente tiene beneficios mayores. También observamos que $CMg_1(q_1^*)>CMg_2(q_2^*)$. Esto significa que se podría haber reasignado parte de la producción de la firma $1$ a la firma $2$ para producir a un costo total menor, para la cantidad $q_1+q_2$. Esto se conoce como \textbf{ineficiencia en la producción}. Es decir, en este equilibrio se asignan cantidades a producir para cada firma de manera que no se igualen los costos marginales y eso da a lugar a los costos de producción agregados en esta economía podrían haber sido menores.
+
+\item Buscamos distribuir $Q^*=\dfrac{600}{11}$ de manera que se minimice el costo total agregado. Como la cantidad agregada está fija, porque el objetivo es producir $\frac{600}{11}$ unidades, entonces minimizar costos para la firma será equivalente a maximizar sus beneficios.
+
+\vspace{-18pt}
+
+\begin{align*}
+    &\displaystyle\max_{q_1, \, q_2}  ET(q_1, q_2) \\
+    &\displaystyle\max_{q_1 , \, q_2}p \underbrace{\left(\dfrac{600}{11}\right)}_\text{$=q_1+q_2$}-q_1^2-\dfrac{q_2^2}{2}
+\end{align*}
+
+\vspace{-18pt}
+
+Esta maximización será equivalente a:
+\begin{align*}
+&\displaystyle\min_{q_1, \, q_2} q_1^2+\dfrac{q_2^2}{2} \quad \text{s.a.} \quad q_1+q_2=\dfrac{600}{11} \\
+&\mathcal{L}(q_1, q_2, \lambda)= q_1^2+\dfrac{q_2^2}{2}-\lambda\left(q_1+q_2-\dfrac{600}{11}\right)
+\end{align*}
+
+\vspace*{-18pt}
+ 
+Las condiciones de primer orden son:
+\vspace*{-12pt}
+\begin{align}
+&(q_1): 2q_1-\lambda=0 \label{A}\\
+&(q_2):q_2-\lambda=0 \label{B}\\
+&(\lambda): q_1+q_2=\dfrac{600}{11} \label{C}
+\end{align}
+
+De (\ref{A}) y (\ref{B}) podemos observar que, en equilibrio, se cumple que $2q_1^*=q_2^*$ . Reemplazando este resultado en (\ref{C}) resolvemos el equilibrio.
+
+\vspace{-18pt}
+
+\begin{align*}
+q_1+2q_1=&\dfrac{600}{11}\\
+3q_1=&\dfrac{600}{11}\\
+q_1^*=&\dfrac{200}{11}
+\end{align*}
+
+\vspace*{-12pt}
+
+Por lo tanto, 
+
+\vspace*{-12pt}
+
+\[q_2^*=\dfrac{400}{11}\]
+
+Notemos que:
+
+\vspace*{-12pt}
+\[CMg_1(q_1^*)=2\cdot\dfrac{200}{11}=\dfrac{400}{11}=CMg_2(q_2^*)\]
+
+Es decir, los costos marginales entre las 2 firmas se tendrán que igualar para que se minimice el costo total dado un nivel de producción.
+\end{enumerate}
+\end{solucion}
+
+\begin{ejercicio} %ejercicio 3
+ Considere un modelo de Cournot con dos firmas y costos unitarios constantes. Los costos unitarios de las dos firmas pueden diferir. Sea $c_j$ el costo unitario (que es constante) de la firma $j$. Suponga que $c_1 > c_2$.
+Suponga además que la función inversa de demanda es $P(Q) = a-bQ$, con $a > c_1$.
+
+\begin{enumerate}[label=(\alph*)]
+\item Obtenga el equilibrio de Nash de este modelo. ¿Bajo qué condiciones tendremos solamente una firma produciendo una cantidad positiva en equilibrio? ¿Cuál sería dicha firma?
+\item Cuando ambas firmas producen cantidades positivas en equilibrio, ¿cómo varían los niveles de producción de equilibrio cuando cambia el costo unitario de la firma $1$?
+
+\item  Suponga que ambas firmas están produciendo cantidades positivas en equilibrio. Compute el excedente social (es decir, la suma del excedente del consumidor y los beneficios de las firmas). ¿Cómo cambia
+dicho excedente cuando cambia $c_1$? ¿Es posible que el excedente social caiga si la firma $1$ se vuelve más eficiente (es decir, si $c_1$ se
+reduce)? Si su respuesta es afirmativa, explique por qué.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion} %solucion ejercicio 3
+\
+\begin{enumerate}[label=(\alph*)]
+\item
+Notemos que $a>c_1$. Esto quiere decir que la firma más ineficiente del mercado produce a un costo menor que el precio máximo que están dispuestos a pagar los consumidores para adquirir el bien. Este supuesto nos permite evitar situaciones que en este caso no nos interesa analizar como la de no tener firmas operando en el mercado o de contar con un monopolio meramente por la relación entre los coeficientes. Notemos que, sin embargo, esta condición para que la firma $1$ produzca no es suficiente: la firma $2$ podría ser ``demasiado'' eficiente y empujar a la firma $1$ fuera del mercado, situación que se daría si el precio de monopolio de la firma $2$ es menor que el costo marginal de la firma $1$. Es decir, la competencia  entre la firma $1$ y la firma $2$ podría resultar en un mercado monopolístico, pero queremos ignorar casos en donde habrá un monopolio debido a una relación entre coeficientes. 
+
+El problema de la firma $i$ es:
+
+\vspace*{-12pt}
+
+\[\displaystyle\max_{q_i}[a-b(q_i+q_j)]q_i-c_i\cdot q_i\]
+
+Podemos ver que \textbf{no hay simetría} entre las firmas debido a los costos. De este problema obtenemos las siguientes CPO para $i=1,2$ y $j\neq i$:
+
+\vspace*{-12pt}
+
+\[(q_i): a-2bq_i-bq_j-c_i=0\]
+
+ Luego, si tomamos las respectivas condiciones para las dos firmas, quedaría conformado del siguiente sistema de ecuaciones:
+ 
+ \vspace*{-28pt}
+ 
+ \begin{align}
+ a-2bq_1-bq_2-c_1&=0 \label{D}\\
+ a-2bq_2-bq_1-c_2&=0 \label{E}
+ \end{align}
+ 
+ Despejamos  $q_1$  de (\ref{E})
+ \vspace*{-12pt}
+ \begin{align*}
+a-2bq_2-bq_1-c_2&=0\\
+a-2bq_2-c_2&=bq_1\\
+q_1=\dfrac{a-c_2}{b}-&2q_2
+\end{align*}
+
+Reemplazamos la expresión obtenida en  (\ref{D})
+\vspace*{-12pt}
+\begin{align*}
+a-2bq_1-bq_2-c_1&=0\\
+a-2b\left(\dfrac{a-c_2}{b}-2q_2 \right)-bq_2-c_1&=0\\
+-a+2c_2+4bq_2-bq_2-c_1&=0\\
+3bq_2&=a-2c_2+c_1\\
+q_2^*&=\dfrac{a+c_1-2c_2}{3b}
+\end{align*}
+
+\vspace*{-12pt}
+
+Reemplazando en (\ref{D}) obtenemos $q_1^*$
+\vspace*{-12pt}
+\begin{align*}
+a-&2bq_1-bq_2-c_1=0\\
+q_1=&\dfrac{a-c_1}{2b}-\dfrac{q_2}{2}\\
+q_1^*=&\dfrac{a-c_1}{2b}-\dfrac{a+c_1-2c_2}{3b}\cdot\dfrac{1}{2}\\
+q_1^*=&\dfrac{3a-3c_1-a-c_1+2c_2}{6b}\\
+q_1^*=&\dfrac{a+c_2-2c_1}{3b}
+ \end{align*}
+ 
+ Como $p^*=a-\dfrac{2a-c_1-c_2}{3}$, el precio y las cantidades de equilibrio serán:
+ 
+ \vspace*{-12pt}
+ 
+ \begin{align*}
+p^*=&\dfrac{a+c_1+c_2}{3}\\
+Q^*=&\dfrac{2a-c_1-c_2}{3b} \qquad \footnotemark
+ \end{align*}
+ 
+ \footnotetext{Notar que como $a>c_1<c_2$ la cantidad agregada será siempre positiva. De todos modos, esa expresión será válida para la cantidad agregada del mercado siempre y cuando $q_1>0$, porque sino, la cantidad agregada de mercado será la cantidad de monopolio de la firma $2$.}
+Intuitivamente, este resultado nos dice que a mayor precio máximo posible ($a$) habrá una mayor cantidad producida por cada firma. Por otra parte, a un mayor costo de la firma rival ($c_j, \, \text{donde } j=2,1$) le corresponderá un aumento en la cantidad propia producida ($q_i, \, \text{donde }i=1,2$), mientras que si aumenta su propio costo marginal ($c_i, \, \text{donde }i=1,2$), cae la cantidad producida de ésta firma. Si aumentan los costos propios ($c_i, \,\text{donde }i=1,2$) la caída en la cantidad ofrecida por la firma $i$ será mayor que lo que aumentará la cantidades producida por el rival, la firma $j$. Notar que:
+
+\vspace*{-20pt}
+
+ \begin{align*}
+q_1^*=\dfrac{a+c_2-2c_1}{3b}
+\end{align*}
+
+\vspace*{-8pt}
+
+Notemos que $q_1^*$ podría ser negativa si $c_1 > \frac{c_2+a}{2}$, es decir, si la firma $1$ es lo suficientemente ineficiente. Por otro lado, la firma $2$ siempre produce cantidades positivas bajo cualquier valor de los parámetros, dado que $a-c_2>0$ y $c_1>c_2$:
+
+\vspace*{-20pt}
+
+\begin{align*}
+q_2^*=\dfrac{a-c_2+c_1-c_2}{3b}>0
+ \end{align*}
+ 
+ \vspace*{-8pt}
+ 
+Si $q_1^*\leq 0$ podría entonces ocurrir que en equilibrio haya una sola firma produciendo. La firma que produciría en equilibrio, en el caso de haber una sola firma que participe del mercado, sería la firma $2$, la más eficiente. Esto sucedería si:
+ 
+ \vspace*{-28pt}
+ 
+ \begin{align*}
+a+c_2-2c_1\leq 0\\
+\dfrac{a+c_2}{2}\leq c_1
+ \end{align*}
+ \vspace*{-28pt}
+\item Supongamos que $c_1<\dfrac{a+c_2}{2}$ de manera que las dos firmas producen cantidades positivas.
+
+\vspace*{-12pt}
+
+\begin{align*}
+\dfrac{\partial q_1^*}{\partial c_1}=\dfrac{-2}{3b}<0\\
+\dfrac{\partial q_2^*}{\partial c_1}=\dfrac{1}{3b}>0
+\end{align*}
+
+\item Si la firma $1$ se vuelve menos eficiente, esto es, si aumenta $c_1$, esta firma producirá menos en equilibrio. En cambio, si se vuelve más eficiente, aumentará su cantidad producida. Ahora bien, si aumenta $c_1$ la firma $2$ producirá más y si $c_1$ cae la firma producirá menos. Notemos por qué esto podría generar efectos ambiguos en el bienestar.
+
+Calculamos el excedente social. Es importante recordar que en esta materia hacemos análisis de \textit{equilibrio parcial.}\footnote{El excedente social es una buena medida de eficiencia cuando los efectos ingreso son bajos (baja elasticidad de ingreso de la demanda, baja participación del bien en el gasto total). Además estamos suponiendo que no hay cambios significativos en otros mercados.}
+
+\vspace*{-24pt}
+
+\begin{align*}
+&ET=EC+\pi_1^*+\pi_2^*\\
+&ET=\displaystyle\int_{0}^{Q^*}\underbrace{(a-bQ)}_\text{p(Q)}dQ-p^*\cdot Q^*+(p^*-c_1)q_1^*+(p^*-c_2)q_2^*\\
+&ET=aQ^*-\dfrac{b\cdot {Q^*}^2}{2}-p^*Q^*+\dfrac{(a+c_2-2c_1)^2}{9b}+\dfrac{(a+c_1-2c_2)^2}{9b}\\
+&ET=(a-p^*)Q^*-\dfrac{b}{2}\cdot {Q^*}^2+\dfrac{(a+c_2-2c_1)^2}{9b}+\dfrac{(a+c_1-2c_2)^2}{9b}\\
+&ET= \dfrac{(2a-c_1-c_2)^2}{18b}+\dfrac{2(a+c_2-2c_1)^2}{18b}+\dfrac{2(a+c_1-2c_2)^2}{18b}
+\end{align*}
+
+Para resolver la cuenta anterior, usaremos el siguiente cálculo auxiliar:
+
+\vspace*{-16pt}
+
+\begin{align*}
+a\cdot Q^*-\dfrac{b}{2}\cdot {Q^*}^2-p^*\cdot Q^*&=(a-p^*)Q^*-\dfrac{b}{2}\cdot {Q^*}^2\\
+(a-p^*)Q^*-\dfrac{b}{2}\cdot {Q^*}^2&= \dfrac{(2a-c_1-c_2)^2}{3^2\cdot b}-\dfrac{b}{2}\cdot \dfrac{(2a-c_1-c_2)^2}{3^2\cdot b^2}\\
+(a-p^*)Q^*-\dfrac{b}{2}\cdot {Q^*}^2&=\dfrac{(2a-c_1-c_2)^2}{18\cdot b}
+\end{align*}
+
+Queremos ver cómo cambia el excedente total ante un cambio en $c_1$.
+
+\vspace*{-16pt}
+
+\begin{align*}
+\dfrac{\partial ET}{\partial c_1}&= \dfrac{-2(2a-c_1-c_2)-8(a+c_2-2c_1)+4(a+c_1-2c_2)}{18b}\\
+\dfrac{\partial ET}{\partial c_1}&= \dfrac{1}{18b}\cdot(-4a+2c_1+2c_2-8a-8c_2+16c_1+4a+4c_1-8c_2)\\
+\dfrac{\partial ET}{\partial c_1}&= \dfrac{1}{18b}\cdot (-8a+22c_1-14c_2)
+\end{align*}
+
+ Si $c_1$ aumenta, entonces el excedente total  
+\begin{itemize}
+    \item \textbf{aumentará} si y sólo si $c_1>\frac{7c_2+4a}{11}$. Esto ocurre porque como la firma $1$ es suficientemente ineficiente al aumentar un poco más su costo unitario $c_1$ se le asignará una menor proporción de la producción total para producir. Esto quiere decir que si una firma ya era ineficiente, podría pasar que al hacerse más ineficiente se genere una mejora en el bienestar.
+    \item \textbf{caerá }si y sólo si $c_1<\frac{7c_2+4a}{11}$. Esto ocurre porque si la firma que es más ineficiente tiene un costo marginal $c_1$ que no es tan alto de manera que la firma $2$ no la puede echar del mercado y que además no es tan ineficiente, si aumenta su costo producirá un poco menos pero no tanto y como la firma $1$ sigue produciendo una considerable cantidad el \textit{ET} caerá. Notar que si estamos en este caso, $c_1<\frac{7c_2+4a}{11}<\frac{a+c_2}{2}$ donde la segunda desigualdad vale si y sólo si $c_2<a$. Es decir, existen casos donde ambas firmas producen y que el bienestar cae ante un aumento de $c_1$.
+ \end{itemize}  
+ 
+ La moraleja de este ejercicio es que una firma, en este caso la firma $1$ puede hacerse más eficiente vía una caída de $c_1$ y sin embargo que el $ET$ caiga. Notar que el $ET$ cae pues $F_1$ no es la firma más eficiente de las dos.
+\end{enumerate}
+\end{solucion}
+
+\begin{ejercicio} %ejercicio 4
+ Existen tres firmas que compiten en cantidades $Q = q_1 + q_2 + q_3$. El costo de
+producción de cada firma es $C_i(q_i, s_i) = \frac{d}{s_i}q_i$, donde d es un parámetro positivo y $s_i$ es el total de activos con los que cuenta la firma $i$: Suponga que $s_1 = s_2 = s_3 = s$:
+
+\begin{enumerate}
+ 
+
+\item  Halle el equilibrio resultante de la competencia. Especifique el precio de mercado y los beneficios de las firmas.
+\item Suponga ahora que dos de las firmas se fusionan, por lo que unen sus activos.
+\begin{enumerate}
+\item Halle el nuevo equilibrio.
+\item Obtenga una condición sobre $s$ tal que, si se cumple, el precio de mercado es más bajo luego de la fusión que previamente. Interprete por qué el precio de mercado puede bajar.
+\item ¿Es la fusión beneficiosa para la firma que no participa de ella?
+Para las firmas que se fusionan, ¿es la fusión conveniente cuando conduce a una baja del precio?
+\end{enumerate}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion} %solucion ejercicio 4
+En este ejercicio queremos ver un ejemplo en donde puede ser ventajosa la fusión de varias firmas. Recordemos que en el ejercicio 4 del TP1 no existían tales ventajas. En ese ejercicio, los costos eran nulos y seguían siendo nulos incluso luego de la fusión. Las ventajas de fusionarse se observan en los casos en los que la fusión lleva a que las firmas involucradas se vuelvan más eficientes porque sus costos disminuyen.
+
+\begin{enumerate}
+\item El problema de la firma $i$ es:
+\vspace*{-18pt}
+\begin{align*}
+&\displaystyle\max_{q_i}\,(a-b(q_i+q_j+q_h))q_i-\dfrac{d}{s}\cdot q_i \\
+&(q_i):a-2bq_i-bq_j-bq_h-\dfrac{d}{s}=0\\
+&q_i^{BR}(q_j , q_h)= \dfrac{a-b(q_j+q_h)-\dfrac{d}{s}}{2b}
+\end{align*}
+
+Definiendo $q_j+q_h=q_f$,
+
+\vspace*{-32pt}
+ 
+\begin{align*}
+q_1^{BR}(q_f)=\dfrac{a-bq_f-\dfrac{d}{s}}{2b}
+\end{align*}
+
+Teniendo en cuenta que hay simetría, valdrá que si:
+\[s_1=s_2=s_3=s \Longrightarrow q_1=q_2=q_3=q\] 
+
+\vspace*{-12pt}
+
+Por lo tanto,
+
+\vspace*{-24pt}
+
+\begin{align*}
+a-2bq_i-bq_j-bq_h-\dfrac{d}{s}&=0\\
+a-4q^*-\dfrac{d}{s}&=0\\
+q^*&=\dfrac{a-\dfrac{d}{s}}{4b}
+\Longrightarrow \begin{cases} \quad Q^*=\dfrac{3\left(a-\dfrac{d}{s}\right)}{4b}\\
+\quad p^*=\dfrac{a+3\cdot \dfrac{d}{s}}{4} 
+\\ \quad\pi_1^*=\pi_2^*=\pi_3^*=\dfrac{\left(a-\dfrac{d}{s}\right)^2}{16b} \end{cases}
+\end{align*}
+
+\item
+
+\begin{enumerate}
+\item
+Supongamos que la firmas $1$ y $2$ se fusionan. Dado que $s_f=s_1+s_2=2s$ no habrá más simetría.
+
+El problema de la firma fusionada es:
+
+\vspace*{-12pt}
+
+\begin{align*}
+ &\displaystyle\max_{q_f}\,(a-bq_f-bq_3)q_f-\dfrac{d}{2s}q_f \\
+ &(q_f): a-2bq_f-bq_3-\dfrac{d}{2s}=0\\
+& q_f^{BR}(q_3)=\dfrac{a-\dfrac{d}{2s}-bq_3}{2b}
+\end{align*}
+
+Además sabemos que:
+
+\vspace*{-32pt}
+
+\begin{align*}
+q_3^{BR}(q_f)=\dfrac{a-bq_f-\dfrac{d}{s}}{2b}
+\end{align*}
+
+Resolvemos el sistema de ecuaciones formado por las dos funciones de mejor respuesta ${q_f}^{BR}(q_3)$ y ${q_3}^{BR}(q_f)$: 
+
+\vspace*{-32pt}
+
+\begin{align*}
+2bq_3=&a-bq_f-\dfrac{d}{s}\\
+2\left(-2bq_f+a-\dfrac{d}{2s}\right)=&a-bq_f-\dfrac{d}{s}\\
+q_f^{**}=&\dfrac{a}{3b}
+\end{align*}
+
+Notemos que ${q_f}^{**}$ no depende de $\frac{d}{s}$.
+
+\vspace*{-32pt}
+\begin{align*}
+q_3^{**}=\dfrac{a-\dfrac{d}{s}-\dfrac{a}{3}}{2b}\Rightarrow q_3^{**}=\dfrac{2a-\dfrac{3d}{s}}{6b}
+ \end{align*}
+Por lo tanto, las cantidades agregadas y precios serán:
+
+\vspace*{-28pt}
+
+\begin{align*}
+Q^{**}&=\dfrac{4a-3\cdot \dfrac{d}{s}}{6b}\\
+Q^{**}&=\dfrac{2a}{3b}-\dfrac{1}{2b}\cdot \dfrac{d}{s}\\
+p^{**}&=\dfrac{2a+3\dfrac{d}{s}}{6}
+\end{align*}
+
+\item
+Queremos una condición sobre $s$ tal que se cumpla $p^{**}<p^*$. En otras palabras, queremos hallar una condición que permita que una fusión vuelva más eficientes a las firmas y que, adicionalmente, haga caer el nivel de precios.
+
+\vspace*{-32pt}
+\begin{align*}
+\dfrac{2a+3\dfrac{d}{s}}{6}&<\dfrac{a+3\dfrac{d}{s}}{4}\\
+4a+6\dfrac{d}{s}&<3a+9\dfrac{d}{s}\\
+a&<\dfrac{3d}{s}\\
+s&<\dfrac{3d}{a}
+\end{align*}
+
+La idea general detrás de todo esto es que existen rendimientos marginales decrecientes en los activos. Si la cantidad de activos es muy grande, el beneficio extra por fusionarse con otra firma no es tan grande y por lo tanto estaríamos en un caso (similar al del ejercicio 4 del TP1) en el que podríamos pensar que los costos fuesen casi iguales a cero. Además, si bien la firma que no se fusiona sería más ineficiente, no obstante tendría una función de costos similar a la firma fusionada porque los costos de ambas firmas son cercanos a cero.
+
+Si $s<\dfrac{3d}{a}$ y las firmas $1$ y $2$ se fusionan, eso generará que caiga el precio luego de la fusión, lo que indica un aumento en la eficiencia productiva del mercado, en el sentido de que si cae el precio luego de la fusión entonces aumenta la cantidad demandada en equilibrio.
+
+\item
+Calculamos $\pi_3^*$ y $\pi_3^{**}$.\footnote{En el caso que la\textbf{ demanda, los costos marginales (no necesariamente iguales) sean lineales y la competencia sea en cantidades}, podemos ver que los beneficios de una firma $i$ serán $\Pi_i=b\cdot(q_i)^2$. Prueben hacer esto para los ejercicios 3 y 4 de este TP para convencerse.}
+
+\vspace*{-20pt}
+
+\begin{align*}
+\pi_3^*=&\dfrac{\left(a-\frac{d}{s}\right)^2}{16b}\vspace{3pt}\\
+\pi_3^{**}=&\dfrac{1}{b}\cdot \left(\dfrac{2a-\frac{3d}{s}}{6}\right)^2
+\end{align*}
+
+\vspace*{-16pt}
+
+A la firma 3 no le convendrá la fusión si:\footnote{Ahora, bien, como los beneficios de las firmas son $\Pi_i=bq_i^2$ entonces vamos a poder simplificar}
+
+\vspace*{-16pt}
+
+\begin{align*}
+\pi_3^*&>\pi_3^{**}\\
+b\cdot(q_3^*)^2&>b\cdot (q_3^{**})^2\\
+(q_3^*)^2&>(q_3^{**})^2\\
+q_3^*&>q_3^{**}\\
+\dfrac{a-\frac{d}{s}}{4b}&>\dfrac{2a-\frac{3d}{s}}{6b}\\
+\dfrac{a-\frac{d}{s}}{2}&>\dfrac{2a-\frac{3d}{s}}{3}\\
+3\p{a-\dfrac{d}{s}}&>2\p{2a-\frac{3d}{s}}\\
+3\dfrac{d}{s}&>a\\
+3\dfrac{d}{a}&>s
+\end{align*}
+
+\textbf{Por lo tanto, la fusión no será beneficiosa para la firma $3$ si $p^{**}<p^*$, es decir, si el precio cae tras la fusión.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%cosas viejas%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%esto se cumple si y sólo si:
+
+%\vspace*{-28pt}
+
+%\begin{align*}
+%3^2\left(a-\dfrac{d}{s}\right)^2-2^2\left(2a-\dfrac{3d}{s}\right)^2&>0\qquad\footnotemark\\
+%\left(3a-3\dfrac{3d}{s}-4a+\dfrac{6d}{s}\right)\cdot \left(3a-\dfrac{3d}{s}+4a-\dfrac{6d}{s}\right)&>0\\
+%\left(\dfrac{3d}{s}-a\right)\cdot \left(7a-\dfrac{9d}{s}\right)&>0
+%\end{align*}
+%\footnotetext{Usamos que $z^2-w^2=(z-w)(z+w)$.}
+
+%\vspace*{-16pt}
+
+%De aquí se desprenden dos casos:
+%\begin{itemize}
+%    \item Si $a<\frac{3d}{s}$ y además $7a>\frac{9d}{s}$, podemos reescribir ambas condiciones como $\frac{9d}{7s}<a<\frac{3d}{s}$. A la firma $3$ en este caso no le convendrá la fusión ya que sus beneficios son menores cuando las firmas $1$ y $2$ se fusionan. A las firmas $1$ y $2$ no les conviene la fusión cuando el precio baja. La intuición es porque sumado a la disminución en el precio, las firmas $1$ y $2$ producirán conjuntamente menos que cuando estaban fusionadas. Ver inciso siguiente.
+ %   \item Cuando $a>\frac{3d}{s}$ y $a<\frac{9d}{7s}$ se llega a un absurdo, por lo que no consideraremos este caso.
+%\end{itemize}
+
+%\textbf{Notar, por otra parte, que la fusión será beneficiosa para la firma $3$ si el precio de equilibrio luego de la fusión sube, es decir, si $a>\frac{3d}{s}>\frac{9d}{7s}$. Ahora bien, si el precio $p^{**}$ cae depende. Si $\frac{9d}{7s}<a<\frac{3d}{s}$ no le conviene la fusión, mientras que si $a<\frac{9d}{7s}$ sí le conviene.}
+
+%En resumen, a $F_3$ la fusión
+
+%\begin{center}
+%\begin{tikzpicture}
+%https://tex.stackexchange.com/questions/241394/drawing-lines-with-arrowheads-at-arbitrary-angles-with-respect-to-the-positive
+%\draw[very thick, -latex] (-6,0) -- (6,0); %eje x
+%\node[fill=none,draw=black,circle,inner sep=1pt,label=below:{\large{$ \dfrac{3d}{a}$}}] at (2,0) {};
+%\node[fill=none,draw=black,circle,inner sep=0pt,label=below:{\large{$0$}}] at (-6,0) {};
+%\node[fill=none,draw=black,circle,inner sep=1pt,label=below:{\large{{$\dfrac{9d}{7a}$}}}] at (-1.5,0) {};
+%\node[fill=none,draw=black,circle,inner sep=0pt,label=below:{\large{$s$}}] at (6,0) {};
+%\draw [thick,black, decorate,decoration={brace,amplitude=10pt,mirror},xshift=0.4pt,yshift=-32pt](-6,0) -- (-1.5,0) node[black,midway,yshift=-0.8cm] {\footnotesize $\text{\color{black} le conviene}$};
+%\draw [thick,black, decorate,decoration={brace,amplitude=10pt,mirror},xshift=0.4pt,yshift=-32pt](-1.5,0) -- (2,0) node[black,midway,yshift=-0.8cm] {\footnotesize $\text{\color{black} no le conviene}$};
+%\draw [thick,black, decorate,decoration={brace,amplitude=10pt,mirror},xshift=0.4pt,yshift=-32pt](2,0) -- (6,0) node[black,midway,yshift=-0.8cm] {\footnotesize $\text{\color{black} le conviene}$};
+%\draw [thick,black, decorate,decoration={brace,amplitude=10pt,mirror},xshift=0.4pt,yshift=-64pt](-6,0) -- (2,0) node[black,midway,yshift=-0.8cm] {\footnotesize $\text{\color{black} y cae el precio}$};
+%\draw [thick,black, decorate,decoration={brace,amplitude=10pt,mirror},xshift=0.4pt,yshift=-64pt](2,0) -- (6,0) node[black,midway,yshift=-0.8cm] {\footnotesize $\text{\color{black} y aumenta el precio}$};
+%\end{tikzpicture}
+%\end{center}
+
+
+%Esto sucederá cuando $a<\frac{3d}{s}$ y por lo tanto $a<\frac{9d}{7s}$. Si el precio baja y el tamaño del mercado es pequeño, las firmas $1$ y $2$ no pueden aprovechar el aumento de eficiencia derivado de la disminución de los costos de producción.
+
+Escribimos ahora los beneficios conjuntos de las firmas $1$ y $2$ en ambos casos para compararlos:
+
+\vspace*{-22pt}
+
+\begin{align*}
+\pi_1^*+\pi_2^*=&2b(q^*)^2\\
+y \qquad \pi_f^{**}=&b(q_f^{**})^2
+\end{align*}
+ 
+\vspace*{-10pt}
+
+ Comparemos los beneficios $\pi_f^{**}$ y $\pi_1^*+\pi_2^*$. A las firmas $1$ y $2$ les convendrá la fusión si\footnote{Recordemos que $s>\frac{3d}{a} \Longleftrightarrow p^{**}>p^*$.}
+
+\vspace*{-24pt}
+
+\begin{align*}
+\pi_1^*+\pi_2^* &<\pi_f^{**}\\
+2b\cdot(q^*)^2&<b\cdot(q_f^{**})^2\\
+2(q^*)^2&<(q_f^{**})^2\\
+\sqrt{2}q^*&<q_f^{**}\\
+\sqrt{2}\dfrac{a-\frac{d}{s}}{4b}&<\dfrac{a}{3b}\\
+3\sqrt{2}\p{a-\frac{d}{s}}&<4a\\
+a-\frac{d}{s}&>\dfrac{2\sqrt{2}}{3}a\\
+s&<\dfrac{3}{3-2\sqrt{2}}\dfrac{d}{a} \\
+s&<(9+6\sqrt{2})\dfrac{d}{a}\qquad\footnotemark
+\end{align*}
+\footnotetext{Notemos que $\dfrac{3}{3-2\sqrt{2}}=\dfrac{3}{3-2\sqrt{2}}\cdot \color{red}\dfrac{3+2\sqrt{2}}{3+2\sqrt{2}}\color{black}=\dfrac{9+6\sqrt{2}}{3^2-(2\sqrt{2})^2}=9+6\sqrt{2}$}
+Por lo tanto, para resumir, la fusión\footnote{Antes de resumir, notemos que en todo momento suponemos que las cantidades producidas son positivas, es decir, estamos descartando los casos donde una firma no produce -i.e. la firma $3$- por tener ser más ineficiente. Por lo tanto, necesitamos que la cantidad de activos sea tal que $q^*>0$ y $q_3^{**}>0$. De la primera condición tiene que valer que $s>\frac{d}{a}$ y de la segunda condición tiene que ocurrir que $s>1.5\frac{d}{a}$. Por lo tanto, para que ambas condiciones sean válidas, pedimos que $s>\frac{3d}{2a}=1.5\dfrac{d}{a}$.}
+
+\begin{center}
+\begin{tikzpicture}
+%https://tex.stackexchange.com/questions/241394/drawing-lines-with-arrowheads-at-arbitrary-angles-with-respect-to-the-positive
+\draw[very thick, -latex] (-6,0) -- (6,0); %eje x
+\node[fill=none,draw=black,circle,inner sep=1pt,label=below:{\large{$ (9+6\sqrt{2})\dfrac{d}{a}$}}] at (2,0) {};
+\node[fill=none,draw=black,circle,inner sep=0pt,label=below:{\large{$\dfrac{3d}{2a}$}}] at (-6,0) {};
+\node[fill=none,draw=black,circle,inner sep=1pt,label=below:{\large{{$\dfrac{3d}{a}$}}}] at (-1.5,0) {};
+\node[fill=none,draw=black,circle,inner sep=0pt,label=below:{\large{$s$}}] at (6,0) {};
+\draw [thick,black, decorate,decoration={brace,amplitude=10pt,mirror},xshift=0.4pt,yshift=-32pt](-6,0) -- (-1.5,0) node[black,midway,yshift=-0.8cm] {\footnotesize $\text{\color{black} a $F_3$ no le conviene y $p^{**}<p^*$}$};
+\draw [thick,black, decorate,decoration={brace,amplitude=10pt,mirror},xshift=0.4pt,yshift=-32pt](-1.5,0) -- (6,0) node[black,midway,yshift=-0.8cm] {\footnotesize $\text{\color{black} a $F_3$ le conviene y $p^{**}>p^{*}$}$};
+\draw [thick,black, decorate,decoration={brace,amplitude=10pt,mirror},xshift=0.4pt,yshift=-64pt](-6,0) -- (2,0) node[black,midway,yshift=-0.8cm] {\footnotesize $\text{\color{black} a la firma fusionada le conviene}$};
+\draw [thick,black, decorate,decoration={brace,amplitude=10pt,mirror},xshift=0.4pt,yshift=-64pt](2,0) -- (6,0) node[black,midway,yshift=-0.8cm] {\footnotesize $\text{\color{black} a la firma fusionada no le conviene}$};
+\end{tikzpicture}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%cosas viejas%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%Luego, si $\frac{3\frac{d}{s}}{3+\sqrt{8}}<a<\frac{3\frac{d}{s}}{3-\sqrt{8}} \Longleftrightarrow \frac{3\frac{d}{a}}{3+\sqrt{8}}<s<\frac{3\frac{d}{a}}{3-\sqrt{8}}$ les convendrá fusionarse.
+
+%Análogamente, a las firmas $1$ y $2$ no les convendrá la fusión si
+
+%\vspace*{-28pt}
+
+%\begin{align*}
+%\pi_1^*+\pi_2^* &>\pi_f^{**}\\
+%\left(\left(3-\sqrt{8}\right)a-\dfrac{3d}{s}\right)\left(\left(3+\sqrt{8}\right)a-\dfrac{3d}{s}\right)&>0
+%\end{align*}
+
+%\vspace*{-15pt}
+%Por lo tanto,
+%\begin{itemize}
+ %   \item Si $s>\frac{3\frac{d}{a}}{3-\sqrt{8}}>\frac{3d}{a}$ no les conviene fusionarse. Vale la pena recordar el ejercicio 4 del TP1: si el precio sube, no les será ventajosa la fusión. En este caso si bien hay un beneficio extra por fusionarse porque caen los costos, como la cantidad de activos es suficientemente altos, los costos marginales caen pero muy poco. Por lo tanto, no hay ventaja notoria por fusionarse.
+  %  \item Si $s<\frac{\frac{d}{a}}{3+\sqrt{8}}$ tampoco les convendrá. Si bien la cantidad de activos es muy poca, el tema es que la disposición máxima a pagar de los consumidores $a$ no es muy alta. Además, si bien las firmas son inicialmente ineficientes y la fusión otorga beneficios, al tener costos suficientemente altos producen poco. Si dos firmas se fusionan seguirían siendo relativamente ineficientes y como internalizan la externalidad de producir de más, en el agregado la cantidad vendida será menor que cuando competían tres firmas y como la demanda es lineal, la elasticidad de la demanda será mayor en el equilibrio con fusión. Por lo tanto, caerán los ingresos totales respecto a los costos totales.
+%\end{itemize}
+
+%\vspace{6pt}
+%En resumen: \textcolor{red}{RELEER}\\
+%Si $\pi_{3 \text{ sin f}}^*>\pi_{3 \text{ con f}}^*$, a la firma 3 no le convendrá la fusión. \textcolor{orange}{ Si el precio baja y el tamaño de mercado no es tan chico (tomar esto con pinzas porque el tamaño del mercado es $\frac{a}{b}$) con una cantidad de activos que no es tan baja (si la cantidad de activos fuera muy baja, los costos serían muy altos) que la diferencia entre estar fusionadas o no es notoria, pero no tan alta que los costos de todas las firmas cuando 2 firmas se fusionan sean tan bajos y que practicamente no hay diferencia entre las estructuras de costos entre la firma 3 y la firma fusionada.}\textcolor{red}{No entiendo las aclaraciones de este resumen y lo que leí del resuelto tampoco me queda claro (ver pág. 20 del resuelto)}\\
+%Por otra parte, a la firma fusionada le conviene la fusión si baja el precio \textcolor{orange}{(porque si en equilibrio el precio fuese mayor eso querría decir que la cantidad es menor, y que como las otras firmas se fusionan, son más concientes de la externalidad negativa que tiene producir una unidad más sobre las unidades inframarginales)} y si la cantidad de activos es suficientemente grande como para que haya una ventaja en haberse fusionado, \textcolor{orange}{es decir, que bajen los costos, pero no demasiado grande que esa diferencia sea cada vez menor (recordar que hay rendimientos decrecientes en los activos).}\\ 
+%A la firma fusionada le conviene la fusión si $\frac{\frac{d}{s}}{3+8\sqrt{8}}<a<\frac{\frac{d}{s}}{3-\sqrt{8}}$
+\end{enumerate}
+\end{enumerate}
+\end{solucion}
+
+\begin{ejercicio} %ejercicio 5
+Considere un mercado con $N$ firmas homogéneas y una demanda $D(p)$ que corta ambos ejes. Todas las firmas tienen la función de costos
+
+\vspace*{-20pt}
+
+\[
+C(q)=
+\begin{cases}
+F+cq & \text{si } q>0\\
+0 & \text{si } q=0\\
+\end{cases}
+\]
+
+Las firmas compiten en precios, y pueden elegir cualquier precio en el intervalo $[0 +\infty)$. Suponga que si varias firmas eligen el precio mínimo, entonces una de ellas se elige al azar para cubrir toda la cantidad demandada (todas las firmas que fijaron el precio mínimo tienen la misma
+probabilidad de ser elegidas). Halle un equilibrio de la competencia en precios. ¿Es el único (en estrategias puras)?
+\end{ejercicio}
+
+\begin{solucion} %solucion ejercicio 5
+La presencia de un costo fijo pero no hundido parece, a primera vista, un supuesto ``inútil'', pero no lo es. Para los problemas en los que se analiza si las firmas querrán o no entrar a competir en un mercado, tener o no costos fijos es un aspecto clave de la decisión que finalmente tomará la firma. En este ejercicio se compite à la Bertrand con costos fijos. Si varias firmas eligen el precio mínimo, una de ellas es elegida al azar para cubrir toda la cantidad demandada. Todas las firmas que eligen el precio mínimo tienen la misma posibilidad de ser elegidas.
+
+Dado que $CMg < CMe$ hay rendimientos crecientes a escala. Como hay IRS, si la regla hubiese sido que cuando muchas firmas empatan en el precio mínimo se repartiesen la demanda en partes iguales, una de las firmas siempre tendría incentivos a hacer \textit{undercutting} porque su costo medio disminuye, razón por la cual no habría equilibrio.
+
+Notemos que:
+\vspace*{-28pt}
+
+\begin{align*}
+& \begin{cases}
+CMg=c\\
+CMe=c+\dfrac{F}{q}
+\end{cases} 
+\end{align*}
+
+Por lo tanto, $CMg<CMe \quad \forall q$.
+
+Antes de comenzar a resolver el equilibrio, recordemos la definición de equilibrio de Nash. 
+
+\vspace{6pt}
+Un \textbf{equilibrio de Nash} es un perfil de estrategias $(p_i^*, p_{-i}^*)$, esto es, un \color{red}\textbf{plan contingente completo}\color{black}, que cumple que:
+\begin{enumerate}
+\item $\pi_i(p_i^*, p_{-i}^*) \geq \pi_i(p_i^{'}, p_{-i}^*) \qquad \forall p_i^{'} \,, \forall i$
+\item $\pi_i(p_i^*, p_{-i}^*) \geq 0 \qquad \forall i$
+\item $S(p)=D(p)$
+\end{enumerate}
+
+ Si bien podría haber otros equilibrios de Nash, nos enfocaremos en la búsqueda de un equilibrio simétrico. Busquemos un equilibrio simétrico de Nash en estrategias puras.
+
+\vspace{6pt}
+Las tres condiciones que mencionamos a continuación son necesarias para encontrar un equilibrio de Nash.
+
+\begin{enumerate}
+\item 
+La primera condición nos dice que ningún jugador $i$ tiene incentivos a desviarse dado el perfil de estrategias que los demás jugadores jugaron $p_{-i}^*$.
+\[p_i^* \text{ es mejor respuesta } p_{-i}^*=(p_1^*,\cdots, p_{i-1}^*,p_{i+1}^*,\cdots,p_n^*) \, \forall i\]
+
+\item Como no hay costos hundidos, el agente se garantiza beneficios mayores o iguales a cero. Esta condición opera como una restricción de participación. Es decir, las firmas que participen en equilibrio van a poder garantizarse al menos los beneficios de no entrar.
+\item
+Pedimos que la oferta iguale a la demanda.
+\vspace*{-8pt}
+\[\pi(p_i,p_{-i})=p_i \cdot D(p_i, p_{-i})-c(D(p_i, p_{-i}))\]
+\end{enumerate}
+\vspace*{-8pt}
+Llamaremos $p^{\min{}}$ al menor precio tal que $\pi_i(p^{\min{}})=0$. Es decir, de los precios todos los precios que podrían elegir las firmas de manera que los beneficios oligopólicos fueran cero, $p^{\min{}}$ es el menor. Si la firma $j$ sale elegida para producir entonces se cumplirá que $\pi_j(p^{\min{}})=0$. Por ende:
+\begin{align*}
+p^{\min{}}\cdot D(p^{\min{}})&-c(D(p^{\min{}}))=0\\
+p^{\min{}}=&\dfrac{c(D(p^{\min{}}))}{D(p^{\min{}})}\\
+p^{\min{}}=&CMe(p^{\min{}})
+\end{align*}
+
+Recordemos que si la firma sale sorteada se llevará toda la demanda y que en una \textbf{competencia à la Bertrand con costos fijos} se cumple $p=CMe$.
+
+Veamos que en equilibrio no puede ocurrir que haya una firma $j$ que elija un precio $\hat{p}_j$ distinto de $p^{\min{}}$ dado que los demás eligen $(p^{\min{}}, \dotsc , p^{\min{}})= p_i^*$.
+
+\begin{itemize}
+    \item[--] Supongamos $\hat{p}_j=p^{\min{}}-\varepsilon$. Entonces se cumple que $\pi_j<0$. En consecuencia, la firma $j$ no tiene incentivos a desviarse de $p^{\min{}}$.
+    \item[--] Ahora supongamos $\hat{p}_j=p^{\min{}}+\varepsilon$. En este caso la firma vendería seguro cero, mientras que con $p^{\min{}}$ tendría una probabilidad de $\frac{1}{N}$ de vender una cantidad positiva.
+\end{itemize}
+Por lo tanto, el equilibrio de Nash en estrategias puras de la competencia de precios será
+\vspace*{-8pt}
+\[ EN=\{(p^{\min{}},\dotsc ,p^{\min{}})\}\]
+
+Sin embargo, éste no es el único equilibrio en estrategias en puras ya que, por ejemplo,
+\vspace*{-4pt}
+\[ \{(p_1,...,p_n):\exists \, i_0 , \, j_0 \,  (i_0\neq j_0) / \, p_{i_0}= p_{j0}=p^{\min{}}, \, p_h \geq p^{\min{}} \, \forall h \neq p_{i_0}, p_{j_0}\}\]
+\vspace*{-4pt}
+\noindent son posibles equilibrios de Nash en estrategias puras, asumiendo que la regla de reparto es la que le asigna toda la demanda a  $i_0$. Es decir, cualquier perfil de estrategias donde al menos dos firmas distintas elijan $p^{\min{}}$ y las demás elijan precios más altos constituye un \textit{EN}.
+\vspace*{-12pt}
+\end{solucion}
+
+\begin{ejercicio} %ejercicio 6
+ $N$ firmas compiten en precios en un mercado con demanda $D(p)$. Cada firma $i$ tiene una función de costos $C(q_i)$, con $C''(q_i) > 0$, \, $i = 1, \cdots , N$.
+¿Existe un equilibrio en el que el precio de mercado resultante es el que ocurriría si las firmas actuasen como competidores perfectos (es decir, como tomadoras de precios)?
+\end{ejercicio}
+
+\begin{solucion} %solucion ejercicio 6
+
+Habrá un equilibrio en donde las firmas se comporten como si fueran tomadoras de precios. Es sumamente importante para la existencia de este equilibrio que los costos convexos, es decir, que haya rendimientos decrecientes a escala.
+
+\pgfmathdeclarefunction{pii}{4}{%
+  \pgfmathparse{#4*(#1-#2)^2+#3}%
+}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  no markers, 
+  domain=0:4, 
+  samples=100,
+  ymin=0,
+  axis lines*=left, 
+  xlabel=$p$,
+  ylabel=$\Pi$,
+  every axis y label/.style={at=(current axis.above origin),anchor=south},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=5cm, 
+  width=12cm,
+  xtick=\empty, 
+  ytick=\empty,
+  enlargelimits=false, 
+  clip=false, 
+  axis on top,
+  grid = major,
+  %hide y axis
+  ]
+
+%pi_n
+ \addplot [very thick,cyan!50!black] {pii(x, 3, 2,-0.25)} node[above,pos=1]{$\Pi_N$};
+ %pi_1
+ \addplot [domain=0.5:4, very thick,red!50!black] {pii(x, 3.5, 3,-0.5)}node[above,pos=1]{$\Pi_1$};
+
+\pgfmathsetmacro\valueA{pii(3,3,2,-0.25)}
+\pgfmathsetmacro\valueB{pii(3.5,3.5,3,-0.5)}
+\pgfmathsetmacro\valueC{pii(1.87868,3,2,-0.25)}
+
+\draw [thick, gray, dashed, fill opacity=0.5]  (axis cs:3,0) -- (axis cs:3,\valueA);
+\draw [thick, gray, dashed, fill opacity=0.5]  (axis cs:3.5,0) -- (axis cs:3.5,\valueB);
+\draw [thick, gray, dashed, fill opacity=0.5]  (axis cs:1.87868,0) -- (axis cs:1.87868,\valueC);
+
+%\addplot [fill=cyan!20, draw=none, domain=4.5:6] {gauss(x,3,1)} \closedcycle;
+\draw [yshift=-1cm, latex-latex](axis cs:0.17157, 0) -- node [fill=white, fill opacity=0.4] {$(1)$} (axis cs:1.05051, 0);
+\draw [yshift=-1cm, latex-latex](axis cs:1.05051, 0) -- node [fill=white, fill opacity=0.4] {$(2)$} (axis cs:1.87868, 0);
+\draw [yshift=-1cm, latex-latex](axis cs:1.87868, 0) -- node [fill=white, fill opacity=0.4] {$(3)$} (axis cs:3.5, 0);
+
+\node[below] at (axis cs:0.17157, 0)  {$p_N$}; 
+\node[below] at (axis cs:1.05051, 0)  {$p_1$}; 
+\node[below] at (axis cs:1.87868, 0)  {$\widetilde{p}$}; 
+\node[below] at (axis cs:3, 0)  {$P^{\text{olig}}$}; 
+\node[below] at (axis cs:3.5, 0)  {$p_M$}; 
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\vspace*{-12pt}
+\begin{itemize}
+    \item En el \textbf{primer tramo} los precios son tales que las firmas que participan en el oligopolio pueden dividirse la demanda de manera tal de que sus beneficios sean positivos. Pero si una firma quisiera cubrir toda la demanda, como $C^{''}(q)>0$, los beneficios de dicha firma como monopolista serían negativos. Notar que en este tramo como los precios son bajos, la demanda será alta. Por lo tanto, si una sola firma quisiera abastecer a toda la demanda sus costos serán muy altos a comparación de sus ingresos.
+    \item En el \textbf{segundo tramo} hay precios intermedios y cantidades no tan bajas. Tanto los beneficios de los participantes del oligopolio como los de un monopolista son positivos. Se cumple además que $\pi_N>\pi_1$. Es decir, si una sola firma quisiera cubrir toda la demanda aumentarán mucho sus costos y no le convendrá hacer \textit{undercutting} para intentar satisfacer la demanda.
+    \item En el \textbf{tercer tramo} hay precios altos y cantidades bajas. Aquí los beneficios de los participantes del oligopolio y los del monopolista son positivos, pero en este caso se cumple $\pi_1>\pi_N$ pues, como las cantidades son muy bajas, las $N$ firmas no se ahorran tanto por repartirse la demanda (en costos), pero sí caen fuertemente sus ingresos. Por lo tanto, si los precios son altos, una firma preferiría vender como monopolista. \\
+En el caso 3 no puede haber un equilibrio de Nash. Como $\pi_1>\pi_N$, si hubiese $N$ firmas, habrían incentivos a hacer \textit{undercutting} y tener beneficios mayores como monopolista. Por otro lado, si hubiese sólo una firma, otra firma tendría incentivos a hacer \textit{undercutting}.
+\end{itemize}
+
+Vamos a ver que existe un equilibrio de Nash simétrico $(p,\dotsc , p)$  si $p \in [p_N,\widetilde{p}]$, donde $p_N$ es el precio tal que $\pi_N(p_N)=0$ y $\widetilde{p}$ es el precio tal que $\pi_N(\widetilde{p})=\pi_1(\widetilde{p})$. Veamos primero que los extremos del intervalo son equilibrios de Nash, para así obtener una intuición general, y después consideremos a cualquier precio del intervalo $[p_N,\widetilde{p}]$. \textit{Comentario: para que exista un equilibrio de Nash tiene que existir $p_1$ que cumpla que $\pi_1(p_1)=0$ y $p_1\in[p_N,\widetilde{p}]$.}
+
+
+\vspace{6pt}
+Supongamos que el \textbf{perfil de estrategias es $p_N$ para cada firma}. Dado que $N-1$ firmas eligen $p_N$, si una firma eligiese $p_N+\varepsilon$ pasaría a no vender y, por ende, tendría beneficios nulos. Es por esto que no habrá incentivos a elegir un precio mayor a $p_N$. Por otro lado, si  eligiese $p_N-\varepsilon$, la firma pasaría a cubrir toda la demanda pero tendría beneficios negativos. Por lo tanto, la firma $N$ no tiene incentivos a elegir un precio ni superior ni inferior a $p_N$, por lo que este perfil es un equilibrio de Nash.
+
+\vspace{12pt}
+Supongamos ahora que el \textbf{perfil de estrategias es $\widetilde{p}$ para cada firma.} Dado que $N-1$ firmas eligen $\widetilde{p}$, si una firma estuviese considerando desviarse y eligiese $\widetilde{p}+\varepsilon$ terminaría por no vender y sus beneficios serían nulos. Por ende, no le convendrá desviarse, teniendo en cuenta que anteriormente obtenía beneficios positivos. Cabe destacar que si la firma prefiriese ``vender'' a ``no vender'' esta preferencia debería verse reflejada en sus preferencias, cosa que no sucede.\footnote{En este caso cuando nos referimos a las preferencias de la firma nos referimos a sus beneficios. Recordemos que la firma considera en la función de costos los costos de oportunidad y si prefiriese por alguna razón no producir (por ejemplo, porque se quiere ir de vacaciones) entonces eso se tendría que ver reflejado en la función de beneficios, cosa que no ocurre en este caso.} La idea es sencillamente que no querrá desviarse a menos que pueda llegar a alcanzar una situación estrictamente mejor. Por otro lado, si eligiese $\widetilde{p}-\varepsilon$, pasaría a captar toda la demanda como monopolista, pero obtendría a cambio beneficios menores. En conclusión, tampoco habrá incentivos a desviarse de $\widetilde{p}$.
+
+\vspace{12pt}
+Veamos que \textbf{si $p \in [p_N,\widetilde{p}]$ entonces el perfil de estrategias $(p,\dotsc , p)$ conforma un equilibrio de Nash}. Dado que $N-1$ firmas eligen $p$, si una firma decide desviarse y cobrar $p+\varepsilon$ no le vendería a nadie en el mercado, por lo que sus beneficios pasarían de ser positivos a ser nulos.  Por otra parte, si decidiese cobrar $p-\varepsilon$, llegaría a cubrir a toda la demanda, lo que haría que obtuviese beneficios menores que los que obtendría en un oligopolio.
+
+\textit{Notar: de todos los equilibrios de Nash hay uno más ``razonable'' que el resto, que es $(\widetilde{p},...,\widetilde{p})$. En este caso, todas las firmas tienen beneficios positivos, siendo además estos los más altos posibles dentro de los distintos equilibrios de Nash.}
+
+\textbf{Comentarios finales:} 
+\begin{itemize}
+\item Este ejercicio pregunta si existe algún equilibrio en donde las firmas actúan como competidoras perfectas. \textbf{Interpreto que lo que se está preguntando es si existe un equilibrio en donde los beneficios de las firmas son cero} (al igual que ocurriría en un mercado perfectamente competitivo con rendimientos constantes a escala). Teniendo esto en cuenta, sabemos que existe un equilibrio en donde las firmas obtienen beneficios iguales a cero. Este equilibrio ocurre si todas las firmas eligen $p_N$.
+\item \textbf{No obstante, se podría pensar qué pasaría si las firmas competitivas eligieran un precio con rendimientos decrecientes a escala igualando precio igual a costo marginal.}\footnote{Si bien ambas interpretaciones se podrían considerar razonables consideramos que, como esta interpretación respecta los rendimientos de la tecnología como la más adecuada. Si quieren leer sobre este caso en particular, leer pp.120-122 de Joaquín Vives, \textit{Oligopoly pricing old ideas and new}.} El problema de una firma en ese caso sería $\displaystyle\max_{y}\, p\frac{y}{N}-C\p{\frac{y}{N}}$, donde de la CPO obtenemos que $p=C'\p{\frac{y}{N}}$. Imponiendo equilibrio de mercado, se tiene que $p_{CP}=C'\p{\frac{D(p)}{N}}$. Como la función de costos es convexa, se tiene que $p_{CP}=C'\p{\frac{D(p)}{N}}>CMe\p{\frac{D(p)}{N}}$ y por lo tanto los beneficios de una firma perfectamente competitiva en este caso serán positivos (no se olviden cuando escriban las restricciones presupuestarias en tópicos de Macro). En este caso no podemos mostrar en general si vale o no que actuar de manera perfectamente competitiva es un perfil de estrategias de equilibrio. Si $p_{CP}<p_{\tilde{p}}$ entonces actuar de manera perfectamente competitiva constituiría un EN. \textbf{Veamos que en el ejemplo que sigue, $p_N<p_{CP}<\tilde{p}$ y por lo tanto este perfil constituye un EN}. Para leer el argumento de por qué vale en general que el precio que surgiría de competencia perfecta, leer el libro de Vives, \textit{Oligopoly pricing old ideas and new}, pp. 120-124.
+\end{itemize}
+
+A continuación repasamos esta intuición con un \textbf{caso particular} para ejemplificar los resultados del ejercicio. Estamos considerando que las $N$ firmas eligen un precio de manera tal de que se reparten la demanda en partes iguales. Luego, las firmas pueden maximizar beneficios teniendo en cuenta que la demanda y la función de costos son:
+
+\vspace*{-24pt}
+
+\begin{align*}
+D(p)&=a-bp\\
+C(q)&=\dfrac{c}{2}q^2
+\end{align*}
+\vspace*{-24pt}
+
+ Por lo tanto, 
+ \vspace*{-24pt}
+ 
+\begin{align*}
+\pi_N&=\displaystyle\max_p p\left(\dfrac{a-bp}{N}\right)-\dfrac{c}{2}\left(\dfrac{a-bp}{N}\right)^2\\
+\pi_N&=\displaystyle\max_p \dfrac{a-bp}{N}\cdot \left[p-\dfrac{c}{2}\left(\dfrac{a-bp}{N}\right)\right]\\
+\pi_N&=\displaystyle\max_p \dfrac{a-bp}{N}\cdot \dfrac{p(2N+bc)-ac}{2N}
+\end{align*}
+
+
+Vamos a buscar algunos precios relacionados al problema de las firmas.
+
+\vspace*{-24pt}
+
+\begin{align}
+p_N \text{ que cumple que } \pi_N(p_N)&=0 \label{6A} \\
+p_1 \text{ que cumple que } \pi_1(p_1)&=0 \label{6B} \\
+\widetilde{p} \text{ que cumple que } \pi_1(\widetilde{p})&=\pi_N(\widetilde{p}) \label{6C}\\
+p^{\text{olig}} \text{ que cumple que } \pi_N^{'}(p^{\text{olig}})&=0 \label{6D}\\
+p_M \text{ que cumple que } \pi^{'}(p_M)&=0 \label{6E}
+\end{align}
+
+
+Queremos ver que $p_N\leq p_1\leq \widetilde{p}\leq p^{\text{olig}}\leq p_M$. Veamos primero que $p_M>p^{\text{olig}}$. Para obtener $p^{\text{olig}}$ resolvemos el siguiente problema donde cada firma produce $\frac{1}{N}$ de la demanda total:
+
+\[\displaystyle\max_p\dfrac{a-bp}{N}-\dfrac{c}{2}\left(\dfrac{a-bp}{N}\right)^2\]
+
+\begin{align*}
+CPO \, (p): \dfrac{a-bp}{N}\cdot\dfrac{2N+bc}{2N}-\dfrac{b}{N}\cdot\dfrac{p(2N+bc)-ac}{2N}=0\\
+\vspace{6pt}
+(a-bp)(2N+bc)-b[p(2N+bc)-ac)]=0
+\end{align*}
+
+
+De (\ref{6D}),
+\vspace{-8pt}
+\begin{align*}
+p^{\text{olig}}=\dfrac{a(N+bc)}{b(2N+bc)}
+\end{align*}
+
+Veamos que $p_M=p_{N=1}^{\text{olig}}>p_{N>1}^{\text{olig}}$. Notemos que si reemplazamos $N=1$, obtenemos la primera igualdad. Para ver que se cumple que $p_{N=1}^{\text{olig}}>p_{N>1}^{\text{olig}}$ y, por lo tanto, que $p_M>p_{N>1}^{\text{olig}}$ basta con ver que $\dfrac{\partial p^{\text{olig}}}{\partial N}<0$
+
+\begin{align*}
+\dfrac{\partial p^{\text{olig}}}{\partial N}&=\dfrac{ab(2N+bc)-2b(aN+abc)}{[b(2N+bc)]^2}\\
+\dfrac{\partial p^{\text{olig}}}{\partial N}&= \dfrac{-4ac}{b(2N+bc)^2}<0
+\end{align*}
+
+Otra forma de comprobarlo es viendo que $p_M=\dfrac{a(1+bc)}{b(2+bc)}>\dfrac{a(N+bc)}{b(2N+bc)}$ si $N>1$.
+
+Esto se cumple si y sólo si:
+
+\vspace*{-28pt}
+
+\begin{align*}
+ (1+bc)(2N+bc)>&(N+bc)(2+bc)\\
+2N+bc+2bcN+(bc)^2>&2N+bcN+2bc+(bc)^2\\
+N>&1
+\end{align*}
+
+Es decir, que $p_M>p^{\text{olig}}$ vale para cualquier $N>1$.
+
+Encontremos ahora el valor de $\widetilde{p}.$ De (\ref{6D}): $\widetilde{p} \text{ que cumple que } \pi_1(\widetilde{p})=\pi_N(\widetilde{p})$
+
+\vspace*{-20pt}
+
+\begin{align*}
+\widetilde{p}(a-b\widetilde{p})-\dfrac{c}{2}(a-b\widetilde{p})^2&=\dfrac{\widetilde{p}(a-b\widetilde{p})}{N}-\dfrac{c}{2}\dfrac{(a-b\widetilde{p})^2}{N^2}\\
+N^2\widetilde{p}(a-b\widetilde{p})-\dfrac{c}{2}N^2(a-b\widetilde{p})^2&=N\widetilde{p}(a-b\widetilde{p})-\dfrac{c}{2}(a-b\widetilde{p})^2\\
+N(N-1)\widetilde{p}(a-b\widetilde{p})&=\dfrac{c}{2}(N^2-1)(a-b\widetilde{p})^2
+\end{align*}
+
+Suponiendo $a-b\widetilde{p}>0$ y $N>1$\footnote{Notar que matemáticamente es suficiente pedir que $a-b\widetilde{p}\neq 0$, pero como ese valor es la cantidad demandada a precio $\widetilde{p}$ pedimos que sea positiva para que tenga sentido económico.}
+
+\vspace*{-16pt}
+
+\begin{align*}
+N\widetilde{p}&=\dfrac{c}{2}(N+1)(a-b\widetilde{p})\\
+N\widetilde{p}&=\dfrac{c}{2}(N+1)(a-b\widetilde{p})\\
+N\widetilde{p}&=\dfrac{c}{2}(N+1)a-\dfrac{c}{2}(N+1)b\widetilde{p}\\
+\left[\dfrac{c}{2}(N+1)b+N\right]\widetilde{p}&=(N+1)a\\
+\widetilde{p}&=\dfrac{(N+1)a}{\frac{c}{2}(N+1)b+N}\\
+\widetilde{p}&=\dfrac{a}{\frac{bc}{2}+\frac{N}{N+1}}
+\end{align*}
+ 
+Habiendo obtenido el valor de $\widetilde{p}$, tendríamos que ver bajo qué condiciones vale que  $\widetilde{p}<p^{\text{olig}}$. 
+\vspace*{-8pt}
+\begin{align*}
+\dfrac{a}{\frac{bc}{2}+\frac{N}{N+1}}<& \dfrac{a(N+bc)}{b(2N+bc)}
+\end{align*}
+
+El problema es que esta cuenta es horrible y no la vamos a hacer.
+
+En el caso particular donde $c=2$ esto ocurrirá si $N>\dfrac{b}{b-1}$ si $b>1$.\footnote{\begin{align*}
+\dfrac{a}{b+\frac{N}{N+1}}<& \dfrac{a(N+2b)}{2b(N+b)}\\
+    2b(N+b)<&(2b+n)\p{\dfrac{N}{N+1}+b}\\
+    2b(N+b)(N+1)<&(2b*N)(N+b(N+1))\\
+    N(2b-1)(N+b)<&(2b+N)Nb\\
+    N(2b-1-b)<&b\\
+    N(b-1)<&b
+\end{align*}} La condición despejada para la cantidad de firmas que forman parte del mercado nos garantiza que $\Tilde{p}$ será menor que $p^{\text{olig}}$. Es decir, se tiene que dar esta condición para que se cumpla que $\widetilde{p}<p^{\text{olig}}$.
+
+De (\ref{6B}): $p_1$ que cumple que $\pi_1(p_1)=(a-bp)\cor{p-\dfrac{c}{2}(a-bp)}=0$
+
+
+\[p_1=\dfrac{ac}{2+bc}\]
+Es fácil ver entonces que $p_N<p_1$.
+
+De (\ref{6A}): $p_N$ que cumple que $\pi_N(p_N)=\dfrac{a-bp}{N}\cor{p-\dfrac{c}{2}\dfrac{(a-bp)}{N}}=0$. 
+
+Es decir,
+\vspace*{-8pt}
+\begin{align*}
+\pi_N(p_N)&=\dfrac{a-bp_N}{N}\underbrace{\left[\dfrac{p_N(2N+bc)-ac}{2N}\right]}_\text{=0}
+\end{align*}
+
+Para encontrar $p_N$ se tiene que cumplir que $\pi_N=0$. Entonces:
+\vspace*{-8pt}
+\[ p_N=\dfrac{ac}{2N+bc}\]
+\vspace*{-8pt}
+Veamos ahora que $p_1<\widetilde{p}$.
+
+\vspace*{-16pt}
+\begin{align*}
+\dfrac{ac}{2+bc}&<\dfrac{a}{\frac{N}{N+1}+\frac{bc}{2}}\\
+\end{align*}
+\vspace*{-30pt}
+
+Esta es una cuenta fea para un valor de $c$ genérico, pero si $c=2$, vale que
+
+\begin{align*}
+    \dfrac{N}{N+1}+b&<1+b\\
+    N&<N+1
+\end{align*}
+
+\noindent Es decir, se cumple siempre que $p_1<\Tilde{p}$.
+
+
+%De (\ref{6E}):
+%\vspace*{-12pt}
+%\begin{align*}
+%\pi_N(p)=&\dfrac{p(a-bp)}{N}-\dfra%c{c}{2}\dfrac{(a-bp)^2}{N^2}\\
+%% falta cambiar los costos multiplicando en estos casos por \dfra%c{c}{2} y me da fiaca así que no lo voy a poner 
+%\dfrac{\partial \pi_N(p)}{\partial p}=&\dfrac{1}{N^2}[(a-bp)(N+b)+(-b)(p(N+b)-a)]\\
+%\dfrac{\partial \pi_N(p)}{\partial p}=&\dfrac{1}{N^2}[a(N+b)-2bp(N+b)+ab]\\
+%\dfrac{\partial \pi_N(p)}{\partial p}=&\dfrac{1}{N^2}[a(N+2b)-2bp(N+b)]
+%\end{align*}
+
+%Si $N=1$, las conclusiones son análogas. Si $p<p_M$ entonces $\frac{\partial \pi_1(p)}{\partial p}>0$, pero si $p>p_M$ entonces $\frac{\partial \pi_1(p)}{\partial p}<0$.
+%\vspace*{-28pt}
+%\begin{align*}
+%\begin{cases}
+%\quad \text{Si } \, p<p_M \quad \Longrightarrow \quad \dfrac{\partial \pi_1(p)}{\partial p}>0\\
+%\quad \text{Si } \, p>p_M \quad \Longrightarrow \quad \dfrac{\partial \pi_1(p)}{\partial p}<0
+%\end{cases}
+%\end{align*}
+
+%Para ver efectivamente que la función de beneficios es cóncava notar que:
+%\vspace*{-12pt}
+%\[\dfrac{\partial ^2 \pi_N(p)}{\partial p}=\dfrac{-2b(N+p)}{N^2}<0\]
+
+Se puede ver además que las funciones de beneficios $\pi_N$ y $\pi_1$ son cóncavas.
+
+Notamos además que para que exista un equilibrio de Nash tiene que existir $p_1$ que cumpla que $\pi_1(p_1)=0, p_1\in [p_N, \widetilde{p}]$.
+\begin{itemize}
+    \item Si $p_1<p_N$ no podría haber equilibrio porque los beneficios del monopolista serían siempre mayores los de los jugadores de un oligopolio, por lo que habría incentivos por parte de alguna firma de hacer \textit{undercutting}.
+    \item Si $p_1>\widetilde{p}$ entonces para $\widetilde{p}, \pi_1(\widetilde{p})=\pi_N(\widetilde{p})<0$. Los monopolistas tendrían siempre beneficios mayores.
+\end{itemize}
+
+
+Volvamos a ver que \textbf{si $p\in [p_N, \widetilde{p}]$ entonces el perfil de estrategias $(p,..,p)$ es un equilibrio de Nash}. Nuevamente, sólo consideraremos los equilibrios simétricos. Veámoslo para $p=p_N$, luego para $p=\widetilde{p}$ y por último extenderemos el resultado para todos los casos intermedios.
+
+
+\underline{Afirmación:} $(p_N,...,p_N)$ constituye un equilibrio de Nash. Dado que $N-1$ firmas eligen $p_N$, si una firma eligiese desviarse y cobrar $p_N+\varepsilon$ no le vendería a ningún agente del mercado. Dado que no mejoró estrictamente su situación, no tendrá incentivos a desviarse. Por otra parte, si una firma eligiese cobrar $p_N-\varepsilon$ pasaría a monopolizar toda la demanda, pero tendría beneficios negativos, por lo que tampoco querría desviarse.
+
+
+\underline{Afirmación:} $(\widetilde{p},...,\widetilde{p})$ constituye un equilibrio de Nash. Dado que $N-1$ firmas eligen $\widetilde{p}$, si una firma eligiese desviarse y cobrar $\widetilde{p}+\varepsilon$ no le vendería a ningún agente del mercado. En caso de hacerlo, pasaría de tener beneficios positivos a tener beneficios nulos. Por otra parte, si una firma eligiese cobrar $p=\widetilde{p}-\varepsilon$ pasaría a cubrir toda la demanda, pero obtendría beneficios menores que los que obtendría en un oligopolio. Por lo tanto, ninguna firma no querrá desviarse.
+
+\underline{Afirmación:} $(p,...,p)$ constituye un equilibrio de Nash si $p\in [p_N, \widetilde{p}]$. La manera de probar este caso es exactamente la misma que antes.
+
+Para concluir, retomamos los \textbf{comentarios finales} y vemos que en este caso hay:
+\begin{itemize}
+    \item un equilibrio en donde los beneficios de las firmas tienen beneficios iguales a cero, cuando eligen $p_N$.
+    \item Si resolviésemos el problema de una firma bajo competencia perfecta, es decir, $\displaystyle\max_{y}\,py-\dfrac{c}{2}\p{\dfrac{y}{N}}^2$ se tiene entonces que $p=c\dfrac{y}{N}$ e imponiendo equilibrio de mercado $y=D(p)$, tenemos que $p=c\dfrac{a-bp}{N}$ por lo que $p_{CP}=\dfrac{ac}{bc+N}$. Pueden probar que $p_N<p_{CP}<\Tilde{p}$\footnote{\begin{align*}
+        \dfrac{ac}{bc+2N}<\dfrac{ac}{bc+N}<\dfrac{a}{\frac{bc}{2}+\frac{N}{N+1}}
+    \end{align*}
+    \noindent La primera desigualdad vale porque el denominador de la primera fracción es mayor que el de la segunda. Para ver que se cumple la segunda desigualdad cabe notar que $\frac{bc}{2}<bc$ y que $\frac{N}{N+1}<N$ por lo que el denominador de la segunda fracción es mayor que el de la tercera.} y \textbf{por lo tanto este perfil constituye un EN en este caso}. 
+\end{itemize}
+
+\underline{Un comentario final:} si leen el \textbf{libro de Vives}, van a poder ver que bajo competencia à la Bertrand con rendimientos decrecientes hay precios de equilbirio que pueden ser más altos que los de Cournot e incluso de los precios que surgirían si todas las firmas coludieran y eligieran un precio cartelizado! Además, esta conclusión puede extenderse a firmas con costos asimétricos.
+
+\end{solucion}
+\end{document}
